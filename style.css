@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: rgb(255, 251, 245);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+nav {
+    background-color: antiquewhite;
+    height: 70px;
+}
+
+.nav-option {
+    text-decoration: none;
+    color: rgb(95, 85, 72);
+}
+
+.nav-contain {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 70px;
+    align-items: center;
+}
+
+.nav-menu {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    /* background-color: aqua; */
+}
+
+.nav-menu a {
+    /* padding: 0px; */
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.nav-menu a:hover {
+    background-color: rgb(222, 206, 185);
+}
+
+.nav-dropdown {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    color: rgb(95, 85, 72);
+    height: 100%;
+    padding: 0 15px;
+    cursor: pointer;
+    appearance: auto;
+    width: fit-content;
+}
+
+.nav-dropdown:hover {
+    background-color: rgb(222, 206, 185);
+}
+
+.nav-dropdown option {
+    background-color: #ffffff;
+    color: #333333;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* footer p {
+    margin: 10px;
+} */
+
+thead {
+    background-color: antiquewhite;
+    height: 50px;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    border-bottom: solid 2px antiquewhite;
+    padding: 6px;
+    /* background-color: blueviolet; */
+}
+
+tr td p {
+    /* background-color: aqua; */
+    margin: auto;
+}
+
+.action-button {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+}
+
+.action-button button {
+    width: 100%;
+}
