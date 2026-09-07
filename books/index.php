@@ -5,13 +5,8 @@ require __DIR__ . '/../includes/header.php';
 
 $sql = "SELECT * FROM books";
 $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-$result2 = $conn->query($sql)->fetch_assoc();
 
 // var_dump($result2);
-
-// $img_path = $result['cover'] != NULL ? "/uploads/{$result['cover']}" : "/uploads/Book.png";
-
-// var_dump($result['author']);
 
 ?>
 
