@@ -24,7 +24,7 @@ $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
         </thead>
         <tbody>
             <?php foreach ($result as $p):
-                $img_path = $p['cover'] != NULL ? "/uploads/{$p['cover']}" : "/uploads/Book.png";
+                $img_path = $p['cover'] != NULL ? "/uploads/covers/{$p['cover']}" : "/uploads/covers/Book.png";
             ?>
                 <tr>
                     <td><img src="<?= $img_path; ?>" alt="<?= $img_path; ?>" style="width:60px; height:100px;"></td>
@@ -36,8 +36,8 @@ $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                     <td><?= $p['stock']; ?></td>
                     <td>
                         <div class="action-button">
-                            <button class="btn btn-warning">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <a class="btn btn-warning" href="/books/edit.php?id=<?= $p['id']; ?>">Edit</a>
+                            <a class="btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>

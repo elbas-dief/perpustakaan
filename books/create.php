@@ -13,9 +13,9 @@ $author = $_POST['author'] ?? '';
 $kategori = $_POST['kategori'] ?? '';
 $tahun = $_POST['tahun'] ?? '';
 $stok = $_POST['stok'] ?? '';
-$cover = $_FILES['cover'] ?? '';
+$cover = $_FILES['cover'] ?? NULL;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (!empty($cover['name']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $info = getimagesize($cover['tmp_name']);
     if ($info === false) {
         $_SESSION['error'] = "File bukan gambar";
@@ -32,20 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!array_key_exists($info[2], $allowed_type)) {
         header("Location: {$_SERVER['HTTP_REFERER']}?message=type not allowed");
+        exit();
     }
 
-    $filename = $_FILES['cover']['name'];
-    $tmp_name = $_FILES['cover']['tmp_name'];
+    $filename = $cover['name'];
+    $tmp_name = $cover['tmp_name'];
 
     $tipe = pathinfo($filename, PATHINFO_EXTENSION);
     $image_name = 'book_' . time() . '.' . $tipe; // book_08092026.jpg
-    $target_dir = __DIR__ . '/../uploads/covers' . $image_name;
+    $target_dir = __DIR__ . '/../uploads/covers/' . $image_name;
 
     move_uploaded_file($tmp_name, $target_dir);
 
     $sql_post = "INSERT INTO books(title, author, category, year, stock, cover) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql_post);
     $stmt->execute([$judul_buku, $author, $kategori, $tahun, $stok, $image_name]);
+
+    header("Location = /../books/index.php");
 }
 
 ?>
@@ -62,13 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div>
         <label for="kategori" class="form-label">Kategori</label>
         <select name="kategori" id="kategori" class="form-select">
-            <option value="novel" class="" disabled selected>--Pilih Kategori--</option>
+            <option value="" class="" disabled selected>--Pilih Kategori--</option>
             <?php foreach ($list_kategori as $k): ?>
                 <option value="<?= $k['category']; ?>">
                     <?= $k['category']; ?>
                 </option>
             <?php endforeach; ?>
-            <option value="lain-lain">Lain-lain</option>
         </select>
     </div>
     <div>
