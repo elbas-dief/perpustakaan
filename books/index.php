@@ -37,7 +37,10 @@ $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                     <td>
                         <div class="action-button">
                             <a class="btn btn-warning" href="/books/edit.php?id=<?= $p['id']; ?>">Edit</a>
-                            <a class="btn btn-danger">Delete</a>
+                            <form action="/books/delete.php" method="POST">
+                                <input type="hidden" name="id" value="<?= $p['id']; ?>">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin hapus buku ini?')">Delete</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

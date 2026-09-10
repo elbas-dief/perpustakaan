@@ -15,7 +15,7 @@ $tahun = $_POST['tahun'] ?? '';
 $stok = $_POST['stok'] ?? '';
 $cover = $_FILES['cover'] ?? NULL;
 
-if (!empty($cover['name']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $info = getimagesize($cover['tmp_name']);
     if ($info === false) {
         $_SESSION['error'] = "File bukan gambar";
@@ -48,7 +48,8 @@ if (!empty($cover['name']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare($sql_post);
     $stmt->execute([$judul_buku, $author, $kategori, $tahun, $stok, $image_name]);
 
-    header("Location = /../books/index.php");
+    header("Location: /../books/index.php");
+    exit();
 }
 
 ?>
