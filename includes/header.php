@@ -14,6 +14,7 @@ session_start();
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -29,16 +30,16 @@ session_start();
                 <a href="/borrowings/index.php" class="nav-option">Peminjaman</a>
                 <select name="admin" id="admin" class="nav-dropdown">
                     <option value="admin">Admin</option>
-                    <option value="profile">Profile Management</option>
+                    <option value="Profile"><a href="/profile-management.php">Profile Management</a></option>
                 </select>
-                <?php 
-                
-                if (isset($_SESSION['logged_in'])) { ?>
-                    <a href="/auth/logout.php" class="nav-option">Logout</a>
+                <?php
+
+                if (isset($_SESSION['logged-in'])) { ?>
+                    <a href="/auth/logout.php" class="nav-option text-danger">Logout</a>
                 <?php } else { ?>
-                <a href="/auth/login.php" class="nav-option">Login</a>
+                    <a href="/auth/login.php" class="nav-option text-success">Login</a>
                 <?php }
-                
+
                 ?>
 
             </div>

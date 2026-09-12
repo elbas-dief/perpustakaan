@@ -2,7 +2,7 @@
 
 <footer>
         <div class="footer-container">
-                <small style="font-weight: bold;">© 2026 Toko Sederhana — Haltev IT Learning Center</small>
+                <small style="font-weight: bold;">© 2026 Mini Library — Haltev IT Learning Center</small>
         </div>
 </footer>
 

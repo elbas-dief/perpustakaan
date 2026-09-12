@@ -18,13 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit();
     }
 
-    $_SESSION['logged_in'] = true;
+    $_SESSION['logged-in'] = true;
     $_SESSION['login-sukses'] = "Selamat datang kembali!";
+    $_SESSION['user-id'] = $user['id'];
+    $_SESSION['username'] = $user['username'];
 
     header("location: /books/index.php");
     exit();
-
 }
+
 
 // echo $_SESSION['logged_in'];
 

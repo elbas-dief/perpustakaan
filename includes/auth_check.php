@@ -2,7 +2,7 @@
 
 function cekLogin ()
 {
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged-in'])) {
         header("Location: /../auth/login.php");
         return;
     }

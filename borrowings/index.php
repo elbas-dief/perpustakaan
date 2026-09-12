@@ -4,6 +4,8 @@ require __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../config/database.php';
 require __DIR__ . '/../includes/auth_check.php';
 
+// var_dump($_SESSION);
+
 cekLogin();
 
 $status = $_GET['status'] ?? 'semua';

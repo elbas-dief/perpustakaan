@@ -2,11 +2,17 @@
 
 require __DIR__ . '/../config/database.php';
 require __DIR__ . '/../includes/header.php';
+// require __DIR__ . '/../includes/auth_check.php';
+
+// cekLogin();
+
+// var_dump($_SESSION);
 
 $sql = "SELECT * FROM books";
 $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
 
 // var_dump($result2);
+
 ?>
 
 <div class="container">
@@ -35,18 +41,12 @@ $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
         <div class="alert alert-success"><?= $_SESSION['buku-diedit']; ?></div>
     <?php unset($_SESSION['buku-diedit']);
     }
-    
+
 
     if (isset($_SESSION['login-sukses'])) { ?>
         <div class="alert alert-success"><?= $_SESSION['login-sukses']; ?></div>
     <?php unset($_SESSION['login-sukses']);
     }
-    ?>
-
-    <?php
-    if (isset($_SESSION['logged-in'])) { ?>
-        <div class="alert alert-success"><?= $_SESSION['logged-sukses']; ?></div>
-    <?php }
     ?>
 
     <h1>Daftar Buku</h1>
@@ -76,14 +76,14 @@ $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                     <td><?= $p['stock']; ?></td>
                     <?php if (isset($_SESSION['logged-in'])) { ?>
                         <td>
-                        <div class="action-button">
-                            <a class="btn btn-warning" href="/books/edit.php?id=<?= $p['id']; ?>">Edit</a>
-                            <form action="/books/delete.php" method="POST">
-                                <input type="hidden" name="id" value="<?= $p['id']; ?>">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin hapus buku ini?')">Delete</button>
-                            </form>
-                        </div>
-                    </td>
+                            <div class="action-button">
+                                <a class="btn btn-warning" href="/books/edit.php?id=<?= $p['id']; ?>">Edit</a>
+                                <form action="/books/delete.php" method="POST">
+                                    <input type="hidden" name="id" value="<?= $p['id']; ?>">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin hapus buku ini?')">Delete</button>
+                                </form>
+                            </div>
+                        </td>
                     <?php } ?>
                 </tr>
             <?php endforeach; ?>
