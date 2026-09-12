@@ -68,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql_post = "UPDATE books SET id=?, title=?, author=?, category=?, year=?, stock=?, cover=? WHERE id=$where";
     $stmt = $conn->prepare($sql_post);
     $stmt->execute([$id, $judul_buku, $author, $kategori, $tahun, $stok, $image_name]);
+    
+    $_SESSION['buku-diedit'] = 'Buku berhasil diperbaharui!';
 
     header("Location: /../books/index.php");
     exit();

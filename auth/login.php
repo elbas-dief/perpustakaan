@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $_SESSION['login-sukses'] = "Selamat datang kembali!";
 
     header("location: /books/index.php");
+    exit();
 
 }
 

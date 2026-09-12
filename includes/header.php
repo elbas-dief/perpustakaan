@@ -31,8 +31,16 @@ session_start();
                     <option value="admin">Admin</option>
                     <option value="profile">Profile Management</option>
                 </select>
+                <?php 
+                
+                if (isset($_SESSION['logged_in'])) { ?>
+                    <a href="/auth/logout.php" class="nav-option">Logout</a>
+                <?php } else { ?>
                 <a href="/auth/login.php" class="nav-option">Login</a>
-                <a href="/auth/logout.php" class="nav-option">Logout</a>
+                <?php }
+                
+                ?>
+
             </div>
         </div>
     </nav>
