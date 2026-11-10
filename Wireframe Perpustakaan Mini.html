@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Sistem Perpustakaan Mini</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f0ebe0;
+  font-family: 'Caveat', cursive;
+  color: #1a1a1a;
+  padding: 32px 24px 60px;
+  min-height: 100vh;
+}
+code { font-family: monospace; font-size: 0.9em; background: #e8e8e8; padding: 1px 4px; border-radius: 3px; }
+
+/* PAGE HEADER */
+.page-header { max-width: 1240px; margin: 0 auto 12px; }
+.page-header h1 { font-size: 30px; font-weight: 700; }
+.tag {
+  display: inline-block; background: #1a1a1a; color: #f0ebe0;
+  font-size: 12px; padding: 2px 10px; border-radius: 99px;
+  margin-right: 6px; font-family: monospace;
+}
+
+/* LEGEND */
+.legend {
+  max-width: 1240px; margin: 18px auto 24px;
+  display: flex; gap: 18px; flex-wrap: wrap;
+  align-items: center; font-size: 14px;
+  background: white; border: 2px solid #1a1a1a;
+  border-radius: 4px; padding: 10px 16px;
+}
+.legend strong { margin-right: 4px; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-box { width: 22px; height: 15px; border: 2px solid #aaa; border-radius: 2px; }
+
+/* GRID */
+.wf-grid {
+  max-width: 1240px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1000px) { .wf-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 640px)  { .wf-grid { grid-template-columns: 1fr; } }
+
+/* WIREFRAME CARD */
+.wf-card { background: white; border: 2.5px solid #1a1a1a; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+.wf-card-header { background: #1a1a1a; color: white; padding: 10px 14px; }
+.wf-card-header .stitle { font-size: 17px; font-weight: 700; display: block; }
+.wf-card-header .spath { font-size: 12px; font-family: monospace; color: #aaa; }
+.wf-card-body { flex: 1; display: flex; flex-direction: column; }
+
+/* NAVBAR */
+.wf-nav {
+  background: #273444; color: white;
+  padding: 7px 12px; display: flex; align-items: center;
+  justify-content: space-between; font-size: 13px;
+  border-bottom: 2px dashed #555;
+}
+.wf-nav-brand { font-weight: 700; font-size: 14px; }
+.wf-nav-links { display: flex; gap: 10px; align-items: center; font-size: 12px; }
+.wf-nav-active { border-bottom: 2px solid white; padding-bottom: 1px; }
+.wf-nav-user { border: 1px solid rgba(255,255,255,.35); padding: 1px 7px; border-radius: 3px; font-size: 11px; }
+.wf-nav-logout { color: #f87171; font-size: 11px; }
+
+/* CONTENT */
+.wf-content { padding: 12px 14px; flex: 1; }
+.wf-row-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.wf-row-title h3 { font-size: 17px; font-weight: 700; }
+
+/* FORM ELEMENTS */
+.wf-label { font-size: 12px; font-weight: 600; color: #555; margin-bottom: 2px; display: block; }
+.wf-input {
+  width: 100%; border: 2px solid #b0b0b0; border-radius: 3px;
+  padding: 5px 8px; font-family: 'Caveat', cursive; font-size: 13px;
+  background: #f5f5f5; color: #777; margin-bottom: 8px;
+}
+.wf-select { appearance: none; cursor: pointer; }
+.wf-search { display: flex; gap: 6px; margin-bottom: 10px; }
+.wf-search .wf-input { margin: 0; flex: 1; }
+
+/* BUTTONS */
+.wf-btn {
+  display: inline-block; border: 2px solid #1a1a1a;
+  padding: 4px 11px; font-family: 'Caveat', cursive;
+  font-size: 13px; border-radius: 3px; background: white; cursor: pointer;
+}
+.wf-btn-primary { background: #1a1a1a; color: white; }
+.wf-btn-sm { padding: 2px 7px; font-size: 11px; }
+.wf-btn-danger { border-color: #dc2626; color: #dc2626; }
+.wf-btn-success { border-color: #15803d; color: #15803d; }
+
+/* TABLE */
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.wf-table th { background: #f0f0f0; border: 1.5px solid #ccc; padding: 4px 6px; font-weight: 700; text-align: left; }
+.wf-table td { border: 1.5px solid #ddd; padding: 4px 6px; vertical-align: middle; }
+.wf-ph { height: 8px; background: #e0e0e0; border-radius: 2px; }
+
+/* BADGES */
+.badge { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+.badge-g { background: #bbf7d0; color: #15803d; border: 1px solid #86efac; }
+.badge-r { background: #fecaca; color: #dc2626; border: 1px solid #fca5a5; }
+.badge-b { background: #bfdbfe; color: #1d4ed8; border: 1px solid #93c5fd; }
+.badge-y { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+
+/* COVER BOX */
+.wf-cover { width: 26px; height: 34px; background: #ddd; border: 1.5px solid #bbb; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #999; }
+
+/* IMG PLACEHOLDER */
+.wf-img-ph {
+  background: repeating-linear-gradient(45deg,#e8e8e8,#e8e8e8 4px,#f4f4f4 4px,#f4f4f4 8px);
+  border: 2px dashed #bbb; border-radius: 3px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #999; font-size: 12px; text-align: center; gap: 2px;
+}
+
+/* PAGINATION */
+.wf-pager { display: flex; gap: 4px; justify-content: center; margin-top: 10px; }
+.wf-page { width: 24px; height: 24px; border: 1.5px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; border-radius: 3px; }
+.wf-page.on { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+
+/* TABS */
+.wf-tabs { display: flex; border-bottom: 2px solid #ddd; margin-bottom: 10px; }
+.wf-tab { padding: 4px 10px; font-size: 12px; border: 1.5px solid #ddd; border-bottom: none; margin-bottom: -2px; background: #f5f5f5; cursor: pointer; }
+.wf-tab.on { background: white; font-weight: 700; border-bottom: 2px solid white; }
+
+/* DIVIDER */
+.wf-div { height: 1.5px; background: repeating-linear-gradient(90deg,#ccc,#ccc 5px,transparent 5px,transparent 10px); margin: 10px 0; }
+
+/* NOTES */
+.wf-notes { background: #fef9c3; border-top: 2px dashed #eab308; padding: 10px 14px; }
+.wf-notes h4 { font-size: 14px; font-weight: 700; color: #854d0e; margin-bottom: 5px; }
+.wf-notes ul { padding-left: 16px; font-size: 13px; color: #713f12; line-height: 1.65; }
+
+/* STEP FLOW */
+.step { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; font-size: 13px; }
+.step-num { background:#1a1a1a; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0; margin-top:1px; }
+
+/* FLOW MAP */
+.flow-map { max-width: 1240px; margin: 28px auto 0; background: white; border: 2.5px solid #1a1a1a; border-radius: 4px; padding: 20px 24px; }
+.flow-map h2 { font-size: 20px; font-weight: 700; margin-bottom: 14px; }
+.flow-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+.flow-box { background:#f5f5f5; border:2px solid #1a1a1a; border-radius:3px; padding:3px 12px; white-space:nowrap; }
+.flow-box.dark { background:#273444; color:white; border-color:#273444; }
+.flow-box.red  { background:#fef2f2; border-color:#fca5a5; color:#dc2626; }
+.flow-box.green{ background:#f0fdf4; border-color:#86efac; color:#15803d; }
+.flow-arr { color:#aaa; }
+
+.footer { max-width:1240px; margin:20px auto 0; font-size:13px; color:#999; text-align:center; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <h1>📚 Wireframe — Sistem Perpustakaan Mini</h1>
+  <div style="margin-top:8px;">
+    <span class="tag">Haltev IT Learning Center · Exam 2</span>
+    <span class="tag">PHP Native</span>
+    <span class="tag">MySQL</span>
+    <span class="tag">Bootstrap 5</span>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <strong>Keterangan:</strong>
+  <div class="legend-item"><div class="legend-box" style="background:#273444;border-color:#273444;"></div> Navbar</div>
+  <div class="legend-item"><div class="legend-box" style="background:#f5f5f5;"></div> Input / Placeholder</div>
+  <div class="legend-item"><div class="legend-box" style="background:#fef9c3;border:1.5px dashed #eab308;"></div> Catatan penting</div>
+  <div class="legend-item"><div class="legend-box" style="background:#bbf7d0;border-color:#86efac;"></div> Stok OK / Status kembali</div>
+  <div class="legend-item"><div class="legend-box" style="background:#fecaca;border-color:#fca5a5;"></div> Stok habis / Dipinjam</div>
+</div>
+
+<!-- WIREFRAME GRID -->
+<div class="wf-grid">
+
+  <!-- ═══════════ 1. LOGIN ═══════════ -->
+  <div class="wf-card">
+    <div class="wf-card-header">
+      <span class="stitle">1. Login</span>
+      <span class="spath">auth/login.php</span>
+    </div>
+    <div class="wf-card-body">
+      <div style="padding:28px 32px;background:#f7f7f5;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+        <div style="text-align:center;margin-bottom:6px;">
+          <div class="wf-img-ph" style="width:52px;height:52px;margin:0 auto 8px;">📚</div>
+          <div style="font-size:19px;font-weight:700;">Perpustakaan Mini</div>
+          <div style="font-size:12px;color:#888;">Haltev IT Learning Center</div>
+        </div>
+        <div style="width:100%;background:white;border:2px solid #1a1a1a;border-radius:4px;padding:16px;">
+          <div class="wf-label">Username</div>
+          <div class="wf-input">admin</div>
+          <div class="wf-label">Password</div>
+          <div class="wf-input">••••••••</div>
+          <div style="margin-top:10px;">
+            <div class="wf-btn wf-btn-primary" style="width:100%;text-align:center;display:block;font-size:15px;">Masuk →</div>
+          </div>
+          <div style="margin-top:8px;text-align:center;font-size:12px;color:#e53e3e;border:1px dashed #fca5a5;border-radius:3px;padding:4px;display:none;">⚠ Username atau password salah</div>
+        </div>
+      </div>
+      <div class="wf-notes">
+        <h4>📌 Catatan</h4>
+        <ul>
+          <li>Hash password pakai <code>password_hash()</code> saat buat admin</li>
+          <li>Verifikasi login: <code>password_verify()</code></li>
+          <li>Simpan sesi: <code>$_SESSION['user_id']</code></li>
+          <li>Redirect ke <code>books/index.php</code> jika berhasil</li>
+          <li>Tampilkan pesan error di bawah form jika gagal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 2. DAFTAR BUKU ═══════════ -->
+  <div class="wf-card">
+    <div class="wf-card-header">
+      <span class="stitle">2. Daftar Buku</span>
+      <span class="spath">books/index.php</span>
+    </div>
+    <div class="wf-card-body">
+      <div class="wf-nav">
+        <span class="wf-nav-brand">📚 Perpustakaan</span>
+        <div class="wf-nav-links">
+          <span class="wf-nav-active">Buku</span>
+          <span>Peminjaman</span>
+          <span class="wf-nav-user">Admin ▾</span>
+          <span class="wf-nav-logout">Logout</span>
+        </div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-row-title">
+          <h3>Daftar Buku</h3>
+          <div class="wf-btn wf-btn-primary" style="font-size:12px;">+ Tambah Buku</div>
+        </div>
+        <div class="wf-search">
+          <div class="wf-input" style="font-size:12px;">🔍 Cari judul atau pengarang...</div>
+          <div class="wf-btn" style="font-size:12px;padding:4px 9px;">Cari</div>
+        </div>
+        <table class="wf-table">
+          <thead>
+            <tr>
+              <th>Cover</th>
+              <th>Judul / Pengarang</th>
+              <th>Kat.</th>
+              <th>Stok</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="wf-cover">img</div></td>
+              <td>
+                <div style="font-weight:700;font-size:11px;">Laskar Pelangi</div>
+                <div style="color:#888;font-size:10px;">Andrea Hirata</div>
+              </td>
+              <td><span class="badge badge-b">Novel</span></td>
+              <td><span class="badge badge-g">3</span></td>
+              <td style="white-space:nowrap;display:flex;gap:3px;">
+                <span class="wf-btn wf-btn-sm" style="color:#1d4ed8;border-color:#93c5fd;">✏</span>
+                <span class="wf-btn wf-btn-sm wf-btn-danger">🗑</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="wf-cover">img</div></td>
+              <td>
+                <div style="font-weight:700;font-size:11px;">Clean Code</div>
+                <div style="color:#888;font-size:10px;">Robert C. Martin</div>
+              </td>
+              <td><span class="badge badge-b">Tek.</span></td>
+              <td><span class="badge badge-r">0</span></td>
+              <td style="white-space:nowrap;display:flex;gap:3px;">
+                <span class="wf-btn wf-btn-sm" style="color:#1d4ed8;border-color:#93c5fd;">✏</span>
+                <span class="wf-btn wf-btn-sm wf-btn-danger">🗑</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5">
+                <div class="wf-ph" style="width:90%;"></div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5">
+                <div class="wf-ph" style="width:75%;"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="wf-pager">
+          <div class="wf-page">‹</div>
+          <div class="wf-page on">1</div>
+          <div class="wf-page">2</div>
+          <div class="wf-page">3</div>
+          <div class="wf-page">›</div>
+        </div>
+      </div>
+      <div class="wf-notes">
+        <h4>📌 Catatan</h4>
+        <ul>
+          <li>Stok 0 → badge <span style="color:#dc2626;">merah</span> · Stok &gt; 0 → badge <span style="color:#15803d;">hijau</span></li>
+          <li>Hapus buku: cek dulu ada peminjaman aktif. Jika ada → tolak</li>
+          <li>Paginasi: 8 buku per halaman (<code>LIMIT 8 OFFSET ?</code>)</li>
+          <li>Search: filter <code>WHERE title LIKE ? OR author LIKE ?</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 3. TAMBAH / EDIT BUKU ═══════════ -->
+  <div class="wf-card">
+    <div class="wf-card-header">
+      <span class="stitle">3. Tambah / Edit Buku</span>
+      <span class="spath">books/create.php · books/edit.php</span>
+    </div>
+    <div class="wf-card-body">
+      <div class="wf-nav">
+        <span class="wf-nav-brand">📚 Perpustakaan</span>
+        <div class="wf-nav-links">
+          <span class="wf-nav-active">Buku</span>
+          <span>Peminjaman</span>
+          <span class="wf-nav-user">Admin ▾</span>
+          <span class="wf-nav-logout">Logout</span>
+        </div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-row-title">
+          <h3>Tambah Buku Baru</h3>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;">
+          <div style="grid-column:1/-1;">
+            <div class="wf-label">Judul Buku *</div>
+            <div class="wf-input">Laskar Pelangi</div>
+          </div>
+          <div>
+            <div class="wf-label">Pengarang *</div>
+            <div class="wf-input">Andrea Hirata</div>
+          </div>
+          <div>
+            <div class="wf-label">Kategori</div>
+            <div class="wf-input wf-select">Novel ▾</div>
+          </div>
+          <div>
+            <div class="wf-label">Tahun Terbit</div>
+            <div class="wf-input">2005</div>
+          </div>
+          <div>
+            <div class="wf-label">Stok *</div>
+            <div class="wf-input">3</div>
+          </div>
+          <div>
+            <div class="wf-label">Cover <em style="font-size:10px;color:#aaa;">(opsional)</em></div>
+            <div class="wf-img-ph" style="height:54px;font-size:11px;">📷 Pilih gambar<br><span style="font-size:10px;">JPG/PNG · max 2MB</span></div>
+          </div>
+        </div>
+        <div class="wf-div"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <div class="wf-btn" style="font-size:12px;">← Batal</div>
+          <div class="wf-btn wf-btn-primary" style="font-size:12px;">💾 Simpan</div>
+        </div>
+      </div>
+      <div class="wf-notes">
+        <h4>📌 Catatan</h4>
+        <ul>
+          <li><strong>Edit:</strong> ambil data lewat <code>?id=...</code>, isi form dengan <code>value="..."</code></li>
+          <li>Upload: gunakan <code>move_uploaded_file()</code> → simpan ke <code>uploads/covers/</code></li>
+          <li>Jika edit &amp; cover tidak diganti → pakai nama file lama dari DB</li>
+          <li>Validasi: judul, pengarang, stok wajib diisi</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 4. DAFTAR PEMINJAMAN ═══════════ -->
+  <div class="wf-card">
+    <div class="wf-card-header">
+      <span class="stitle">4. Daftar Peminjaman</span>
+      <span class="spath">borrowings/index.php</span>
+    </div>
+    <div class="wf-card-body">
+      <div class="wf-nav">
+        <span class="wf-nav-brand">📚 Perpustakaan</span>
+        <div class="wf-nav-links">
+          <span>Buku</span>
+          <span class="wf-nav-active">Peminjaman</span>
+          <span class="wf-nav-user">Admin ▾</span>
+          <span class="wf-nav-logout">Logout</span>
+        </div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-row-title">
+          <h3>Peminjaman</h3>
+          <div class="wf-btn wf-btn-primary" style="font-size:12px;">+ Catat Pinjam</div>
+        </div>
+        <div class="wf-tabs">
+          <div class="wf-tab on">Semua</div>
+          <div class="wf-tab">Dipinjam</div>
+          <div class="wf-tab">Dikembalikan</div>
+        </div>
+        <table class="wf-table">
+          <thead>
+            <tr>
+              <th>Judul Buku</th>
+              <th>Peminjam</th>
+              <th>Tgl Pinjam</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size:10px;max-width:80px;">Laskar Pelangi</td>
+              <td style="font-size:10px;">Budi S.</td>
+              <td style="font-size:10px;white-space:nowrap;">10/05/26</td>
+              <td><span class="badge badge-r" style="font-size:10px;">Dipinjam</span></td>
+              <td><span class="wf-btn wf-btn-sm wf-btn-success" style="font-size:10px;white-space:nowrap;">↩ Kembalikan</span></td>
+            </tr>
+            <tr>
+              <td style="font-size:10px;max-width:80px;">Sapiens</td>
+              <td style="font-size:10px;">Sari W.</td>
+              <td style="font-size:10px;white-space:nowrap;">05/05/26</td>
+              <td><span class="badge badge-g" style="font-size:10px;">Kembali</span></td>
+              <td style="color:#ccc;font-size:11px;">—</td>
+            </tr>
+            <tr>
+              <td colspan="5"><div class="wf-ph" style="width:85%;"></div></td>
+            </tr>
+            <tr>
+              <td colspan="5"><div class="wf-ph" style="width:70%;"></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="wf-notes">
+        <h4>📌 Catatan</h4>
+        <ul>
+          <li>Filter via URL: <code>?status=dipinjam</code> atau <code>?status=dikembalikan</code></li>
+          <li>Tombol <strong>↩ Kembalikan</strong> hanya tampil jika status = <em>dipinjam</em></li>
+          <li>Klik tombol → POST ke <code>return.php?id=X</code></li>
+          <li>Tampilkan kolom <em>Tgl Kembali</em> jika status sudah dikembalikan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 5. FORM PINJAM ═══════════ -->
+  <div class="wf-card">
+    <div class="wf-card-header">
+      <span class="stitle">5. Form Catat Peminjaman</span>
+      <span class="spath">borrowings/create.php</span>
+    </div>
+    <div class="wf-card-body">
+      <div class="wf-nav">
+        <span class="wf-nav-brand">📚 Perpustakaan</span>
+        <div class="wf-nav-links">
+          <span>Buku</span>
+          <span class="wf-nav-active">Peminjaman</span>
+          <span class="wf-nav-user">Admin ▾</span>
+          <span class="wf-nav-logout">Logout</span>
+        </div>
+      </div>
+      <div class="wf-content">
+        <div class="wf-row-title">
+          <h3>Catat Peminjaman</h3>
+        </div>
+        <div class="wf-label">Pilih Buku * <em style="font-size:10px;color:#aaa;">(hanya stok &gt; 0)</em></div>
+        <div class="wf-input wf-select" style="margin-bottom:4px;">— Pilih buku... ▾</div>
+        <div style="background:#f0fdf4;border:1.5px dashed #86efac;border-radius:3px;padding:5px 9px;font-size:11px;color:#15803d;margin-bottom:10px;">✓ Stok tersedia: <strong>3</strong> eksemplar</div>
+        <div class="wf-label">Nama Peminjam *</div>
+        <div class="wf-input">Nama lengkap peminjam</div>
+        <div class="wf-label">Tanggal Pinjam *</div>
+        <div class="wf-input">10/05/2026 📅</div>
+        <div class="wf-div"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <div class="wf-btn" style="font-size:12px;">← Batal</div>
+          <div class="wf-btn wf-btn-primary" style="font-size:12px;">📋 Catat Pinjam</div>
+        </div>
+      </div>
+      <div class="wf-notes">
+        <h4>📌 Catatan</h4>
+        <ul>
+          <li>Dropdown: <code>WHERE stock &gt; 0</code> — buku habis tidak muncul</li>
+          <li>Saat submit: jalankan 2 query berurutan:</li>
+          <li style="list-style:none;padding-left:8px;">① INSERT ke tabel <code>borrowings</code></li>
+          <li style="list-style:none;padding-left:8px;">② UPDATE <code>books</code> set stock - 1</li>
+          <li>Redirect ke <code>borrowings/index.php</code> setelah berhasil</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 6. PROSES KEMBALIKAN ═══════════ -->
+  <div class="wf-card">
+    <div class="wf-card-header">
+      <span class="stitle">6. Proses Kembalikan Buku</span>
+      <span class="spath">borrowings/return.php</span>
+    </div>
+    <div class="wf-card-body">
+      <div class="wf-nav">
+        <span class="wf-nav-brand">📚 Perpustakaan</span>
+        <div class="wf-nav-links">
+          <span>Buku</span>
+          <span class="wf-nav-active">Peminjaman</span>
+          <span class="wf-nav-user">Admin ▾</span>
+          <span class="wf-nav-logout">Logout</span>
+        </div>
+      </div>
+      <div class="wf-content" style="display:flex;flex-direction:column;gap:12px;padding-top:16px;">
+        <div style="background:#f7f7f5;border:2.5px dashed #bbb;border-radius:4px;padding:16px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">⚙️</div>
+          <div style="font-size:15px;font-weight:700;">Tidak ada tampilan UI</div>
+          <div style="font-size:12px;color:#777;margin-top:3px;">Hanya proses PHP (POST handler) + redirect</div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Alur saat tombol "↩ Kembalikan" diklik:</div>
+          <div class="step"><div class="step-num">1</div><span>Terima <code>id</code> borrowing dari POST/GET</span></div>
+          <div class="step"><div class="step-num">2</div><span>Ambil <code>book_id</code> dari tabel borrowings</span></div>
+          <div class="step"><div class="step-num">3</div><span>UPDATE borrowings: status = <em>'dikembalikan'</em>, return_date = CURDATE()</span></div>
+          <div class="step"><div class="step-num">4</div><span>UPDATE books: stock = stock + 1</span></div>
+          <div class="step"><div class="step-num">5</div><span>Redirect → <code>borrowings/index.php</code></span></div>
+        </div>
+      </div>
+      <div class="wf-notes">
+        <h4>📌 Catatan</h4>
+        <ul>
+          <li>Tidak perlu form — langsung proses saat tombol diklik</li>
+          <li>Tetap pasang <code>auth_check.php</code> di baris pertama</li>
+          <li>Kedua UPDATE harus berhasil — stok &amp; status harus sinkron</li>
+          <li>Gunakan prepared statements untuk keamanan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FLOW MAP -->
+<div class="flow-map">
+  <h2>🗺 Alur Navigasi Antar Halaman</h2>
+  <div class="flow-row">
+    <div class="flow-box">auth/login.php</div>
+    <span class="flow-arr">──→</span>
+    <div class="flow-box dark">books/index.php</div>
+    <span class="flow-arr">⟵→</span>
+    <div class="flow-box">books/create.php</div>
+    <span class="flow-arr">/</span>
+    <div class="flow-box">books/edit.php</div>
+    <span class="flow-arr">/</span>
+    <div class="flow-box red">books/delete.php</div>
+  </div>
+  <div class="flow-row">
+    <div class="flow-box">auth/login.php</div>
+    <span class="flow-arr">──→</span>
+    <div class="flow-box dark">borrowings/index.php</div>
+    <span class="flow-arr">⟵→</span>
+    <div class="flow-box">borrowings/create.php</div>
+    <span class="flow-arr">/</span>
+    <div class="flow-box green">borrowings/return.php</div>
+  </div>
+  <div style="margin-top:10px;font-size:13px;color:#555;border-top:1.5px dashed #ccc;padding-top:10px;">
+    ⚠ <strong>Semua halaman</strong> di <code>books/</code> dan <code>borrowings/</code> wajib pasang <code>require_once '../includes/auth_check.php';</code> di baris pertama — otomatis redirect ke login jika belum login.
+  </div>
+</div>
+
+<!-- URUTAN PENGERJAAN -->
+<div class="flow-map" style="margin-top:16px;">
+  <h2>📋 Urutan Pengerjaan yang Disarankan</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;">
+    <div class="step" style="margin:0;"><div class="step-num">1</div><span>Buat database &amp; jalankan SQL</span></div>
+    <span class="flow-arr">→</span>
+    <div class="step" style="margin:0;"><div class="step-num">2</div><span>Setup <code>database.php</code>, <code>header.php</code>, <code>footer.php</code>, <code>auth_check.php</code></span></div>
+    <span class="flow-arr">→</span>
+    <div class="step" style="margin:0;"><div class="step-num">3</div><span>Buat login &amp; <code>create_admin.php</code></span></div>
+    <span class="flow-arr">→</span>
+    <div class="step" style="margin:0;"><div class="step-num">4</div><span>CRUD Buku (books/) selesai dulu</span></div>
+    <span class="flow-arr">→</span>
+    <div class="step" style="margin:0;"><div class="step-num">5</div><span>Fitur Peminjaman (borrowings/)</span></div>
+    <span class="flow-arr">→</span>
+    <div class="step" style="margin:0;"><div class="step-num">6</div><span>Finishing: search, paginasi, validasi stok</span></div>
+  </div>
+</div>
+
+<div class="footer" style="margin-top:20px;">
+  Wireframe ini adalah panduan visual untuk siswa. Detail teknis lengkap ada di dokumen rancangan sistem. Selamat mengerjakan! 💪
+</div>
+
+</body>
+</html>
